@@ -17,18 +17,26 @@ url_safe_address = URI.encode(the_address)
 
 # Your code goes below. Hints:
 
-# url_of_data_we_want = "???"
-# raw_data = ???
-# parsed_data = ???
+url_of_data_we_want = "http://maps.googleapis.com/maps/api/geocode/json?address="
+url = url_of_data_we_want + url_safe_address
+raw_data = open(url).read
+parsed_data = JSON.parse(raw_data)
+results = parsed_data["results"]
+first = results[0]
+geometry = first["geometry"]
+location = geometry["location"]
+lat = location["lat"]
+lng = location["lng"]
+
 
 # ...
 
 # Let's store the latitude in a variable called 'the_latitude',
 #   and the longitude in a variable called 'the_longitude'.
 
-# the_latitude = ???
-# the_longitude = ???
+the_latitude = lat
+the_longitude = lng
 
 # Ultimately, we want the following line to work when uncommented:
 
-# puts "The latitude of #{the_address} is #{the_latitude} and the longitude is #{the_longitude}."
+puts "The latitude of #{the_address} is #{the_latitude} and the longitude is #{the_longitude}."
